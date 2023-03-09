@@ -1,0 +1,1 @@
+export const MAIN_CONTAINER = "bg-gradient-to-t from-[#32235c] via-[#48296d] via-[#602e7d] via-[#7a328b] to-[#953498] text-white"
