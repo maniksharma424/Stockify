@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import React from 'react'
 import { useState } from 'react';
 import Header from './Header';
@@ -6,6 +7,9 @@ const Signup = ({handleAuthentication}) => {
     const [password, setPassword] = useState("");
     return (
       <>
+      <Head>
+        <title>Signup</title>
+      </Head>
       <Header/>
         <div className="container max-w-full h-[800px] flex justify-center items-center ">
           <form

@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import Header from "./Header";
 import Link from "next/link";
+import Head from "next/head";
 
 const Login = ({handleAuthentication}) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   return (
     <>
+    <Head>
+        <title>Login</title>
+    </Head>
     <Header/>
       <div className="container max-w-full h-[800px] flex justify-center items-center ">
         <form

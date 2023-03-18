@@ -3,11 +3,11 @@ import Link from 'next/link'
 
 const Header = () => {
   return (
-    <div  className='header w-full flex justify-end py-4 font-[200]'>
+    <div  className='header w-full flex justify-end py-4 px-2 sm:text-[16px] text-[12px] font-[200]'>
         <ul className='flex w-2/5 justify-around'>
             <Link href="/Homepage"><li>Home</li></Link>
-            <li>About</li>
-            <Link href="/auth"><li>Login</li></Link>
+            <Link href="/Dashboard"><li>Dashboard</li></Link>
+            <Link href="/auth"><li>Profile</li></Link>
         </ul>
     </div>
   )
