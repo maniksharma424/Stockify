@@ -1,46 +1,25 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import store from "@/store";
-import { deleteBookmark } from "@/slices/boookmarksSlice";
+import { useSelector } from "react-redux";
+
 import { motion } from "framer-motion";
 
 const Bookmarks = () => {
-  const [selectStocks, setSelectStocks] = useState(false);
-
   const addedBookmarks = useSelector((store) => store?.bookmarks?.bookmarks);
-
-  const dispatch = useDispatch();
 
   return (
     <motion.div
       initial={{ y: "50%", opacity: 0, scale: 0.5 }}
       animate={{ y: 0, opacity: 1, scale: 1 }}
-      className="bookmarks w-11/12 h-3/5 border-[1px]  p-2 rounded-lg overflow-scroll shadow-xl"
+      className="bookmarks w-11/12 h-3/5 border-[1px]  p-2 rounded-lg overflow-scroll shadow-xl bg-inherit"
     >
-      <li className="w-11/12 p-1 flex justify-between ">
-        <p>My Bookmarks</p>
-        <p>
-          {addedBookmarks.length > 0 ? (
-            <button
-              onClick={() => {
-                setSelectStocks((n) => !n);
-              }}
-              className=" px-1 border-[1px] font-[100] shadow-md"
-            >
-              {" "}
-              {selectStocks ? <span>Done</span> : <span>Unsubscribe</span>}
-            </button>
-          ) : null}
-        </p>
-      </li>
+      <p>My Bookmarks</p>
       <ul className="flex flex-col py-2 items-start">
         {addedBookmarks.length > 0 ? (
           <li className="w-full flex  text-[13px] font-[100]">
-            <div className="w-1/2  px-1">Symbol</div>
-            <div className="flex justify-between px-4 w-1/2 ">
-              <p className="">%change</p>
-              <p className="">Price</p>
-            </div>
+            <p className="w-1/2  px-1 font-[600]">Symbol</p>
+
+            <p className=" w-1/4 font-[600]">Change %</p>
+            <p className="w-1/4 font-[600] flex justify-end">Price</p>
           </li>
         ) : null}
 
@@ -60,36 +39,22 @@ const Bookmarks = () => {
                   key={index}
                   className="w-full p-1 flex justify-between border-[1px]"
                 >
-                  {selectStocks ? (
-                    <button
-                      onClick={() => {
-                        dispatch(deleteBookmark(bookmark));
-                        console.log(bookmark);
-                      }}
-                      className="relative   px-2 rounded-md left-[10px]"
-                    >
-                      🗑
-                    </button>
-                  ) : null}
-                  <p className="w-1/3">{bookmark?.["01. symbol"]}</p>
-                  <p
+                  <p className="w-1/2">{bookmark?.["01. symbol"]}</p>
+                  <div
                     className={
-                      parseFloat(bookmark?.["09. change"]) > 0
-                        ? "text-green-500"
-                        : "text-red-600"
+                      parseFloat(bookmark?.["10. change percent"]) > 0
+                        ? "text-green-500 w-1/2 flex"
+                        : "text-red-600 w-1/2 flex"
                     }
                   >
-                    {parseFloat(bookmark?.["09. change"]).toFixed(2) + "%"}
-                  </p>
-                  <p
-                    className={
-                      parseFloat(bookmark?.["09. change"]) > 0
-                        ? "text-green-500"
-                        : "text-red-600"
-                    }
-                  >
-                    {parseFloat(bookmark?.["08. previous close"]).toFixed(2)}
-                  </p>
+                    <p className="w-1/2">
+                      {parseFloat(bookmark?.["10. change percent"]).toFixed(2) +
+                        "%"}
+                    </p>
+                    <p className="w-1/2 flex justify-end">
+                      {parseFloat(bookmark?.["08. previous close"]).toFixed(2)}
+                    </p>
+                  </div>
                 </li>
               </motion.div>
             );

@@ -22,6 +22,7 @@ const getSuggestionResults = async (text, setSuggestions) => {
   const json = await response.json().catch((err) => {
     throw new Error();
   });
+
   if (json.bestMatches) return setSuggestions(json?.bestMatches);
   else return null;
 };
@@ -35,9 +36,13 @@ export const getStockPrice = async (dispatch,symbol) => {
   ).then(res=>res.json())
 
   const data = await response["Global Quote"]
-// console.log(data["Global Quote"]);
-console.log(data);
 
   dispatch(addBookmark(data));
 };
 
+export const formatDate = (dateStr) =>{
+  const date = new Date(dateStr);
+  const day = date.getDate();
+  const month = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(date);
+  return `${day} ${month.substring(0,3)}`;
+}

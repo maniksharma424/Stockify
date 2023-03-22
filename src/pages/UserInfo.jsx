@@ -1,32 +1,51 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import { setDay, setNight, setTextDefault, setTextNight } from "@/slices/dashboardSlice";
 const UserInfo = () => {
-
+  const [isDay, setIsDay] = useState(true);
   const date = new Date();
-  const addedBookmarks = useSelector((store) => store?.bookmarks?.bookmarks);
+  const dispatch = useDispatch();
 
+console.log('user info');
   return (
-    <div className="user-info w-11/12 h-1/6 flex justify-between rounded-md ">
-      <motion.div 
-      initial={{ y: "50%", opacity: 0, scale: 0.5 }}
-      animate={{ y: 0, opacity: 1, scale: 1 }}
-      className="w-1/2 border-[1px] rounded-md p-2 flex flex-col justify-around items-start font-[300] shadow-xl ">
-        <button>View Profile</button>
-        <button>Settings</button>
-        <button>Log Out</button>
-        
-      </motion.div>
+    <div className="user-info w-11/12 h-1/6 border-[1px]  rounded-md bg-inherit ">
       <motion.div
-      initial={{ y: "50%", opacity: 0, scale: 0.5 }}
-      animate={{ y: 0, opacity: 1, scale: 1 }}
-      className=" other-info w-1/2 mx-2 border-[1px] rounded-md p-2 flex flex-col justify-around items-start font-[300] shadow-xl">
-        <p className="text-[17px] font-[100]">Manik Sharma</p>
-        <p> Bookmarks : <span className="text-blue-500">{addedBookmarks?.length} </span></p>
-      <span className="text-blue-500 text-[10px]">
+        initial={{ y: "50%", opacity: 0, scale: 0.5 }}
+        animate={{ y: 0, opacity: 1, scale: 1 }}
+        className=" other-info w-full h-1/2  rounded-md p-2 flex justify-between items-center font-[300] "
+      >
+        <p className="text-[19px] font-[500]">Manik Sharma</p>
+        <span className="text-blue-500 text-[10px]">
           {date.getDate()}/{date.getMonth()}/{date.getFullYear()}
         </span>
-       
+      </motion.div>
+      <motion.div
+        initial={{ y: "50%", opacity: 0, scale: 0.5 }}
+        animate={{ y: 0, opacity: 1, scale: 1 }}
+        className="w-full h-1/2 rounded-md p-2 flex  justify-between items-center font-[300]  "
+      >
+      <Link href='/auth'>  <motion.button whileTap={{ scale: 0.9 }} whileHover={{scale:1.5}} className="py-1 px-2 border-[1px] shadow-lg rounded-md">
+          👤
+        </motion.button></Link>
+        <motion.button
+        whileTap={{ scale: 0.9 }} whileHover={{scale:1.5}}
+          onClick={() => {
+            isDay ? dispatch(setNight())&  setIsDay((n) => !n) & dispatch(setTextNight()) : dispatch(setDay()) & setIsDay((n) => !n) & dispatch(setTextDefault())
+            
+          }}
+          className="py-1 px-2 border-[1px] shadow-lg rounded-md"
+        >
+          {isDay ? "🌚" : "🌞"}
+        </motion.button>
+
+      <Link href="/Homepage">  <motion.button whileTap={{ scale: 0.9 }} whileHover={{scale:1.5}} className="py-1 px-2 border-[1px] shadow-lg rounded-md">
+          🏠
+        </motion.button></Link>
+     <Link href='/Settings'>  <motion.button whileTap={{ scale: 0.9 }} whileHover={{scale:1.5}} className="py-1 px-2 border-[1px] shadow-lg rounded-md">
+          ⚙️
+        </motion.button></Link> 
       </motion.div>
     </div>
   );

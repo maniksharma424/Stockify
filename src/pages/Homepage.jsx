@@ -18,7 +18,7 @@ const Homepage = () => {
             <motion.div
               animate={{ y: -50 }}
               initial={{ y: 300 }}
-              className="w-3/4    px-3 sm:text-[35px] text-[15px] py-20"
+              className="w-3/4    px-3 sm:text-[35px] text-[15px] sm:mt-0 mt-36 sm:py-20"
             >
               Stockify
             </motion.div>
