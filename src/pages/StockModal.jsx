@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { defaultOpacity } from "@/slices/dashboardSlice";
 import { ALPHA_VANTAGE_KEY } from "@/constants";
 import { getStockPrice } from "@/utilities";
@@ -26,12 +26,15 @@ const StockModal = ({ item, handleModal, handleSuggestions }) => {
 
   }, []);
   console.log(data);
+const background = useSelector(store=>store.dashboardSlice.modalBg)
+ 
+if(data === undefined) return <p>hi</p>
 
-  return (
+else return (
     <motion.div
       initial={{ y: "40%", opacity: 0, scale: 0.5 }}
       animate={{ y: 0, opacity: 1, scale: 1 }}
-      className="w-full sm:w-[520px]  sm:left-[450px]  h-[400px] bg-white absolute z-40  bottom-0 p-3 border-[1px] rounded-md "
+      className={`w-full sm:w-[520px]  sm:left-[450px]  h-[400px] ${background} absolute z-40  bottom-0 p-3 border-[1px] rounded-md `}
     >
       <div className="w-full h-1/4  p-2">
         <p className="font-[300] text-[18px] tracking-wide">
@@ -61,7 +64,7 @@ const StockModal = ({ item, handleModal, handleSuggestions }) => {
           </p>
         </div>
       </div>
-      <div className=" chart max-w-full h-2/4 border-[1px] shadow-lg">
+      <div className=" chart max-w-full h-2/4 border-[1px]  shadow-lg">
         <Chart item={item} />
       </div>
       <div className="w-full h-1/4  flex justify-around items-center">
@@ -79,11 +82,10 @@ const StockModal = ({ item, handleModal, handleSuggestions }) => {
           whileTap={{ scale: 0.9 }}
           className="border-[1px] px-7 py-2 text-[16px] bg-blue-500 text-white rounded-md shadow-lg"
           onClick={() => {
+            dispatch(addBookmark(data))
             handleModal();
             handleSuggestions();
             dispatch(defaultOpacity());
-            // getStockPrice(dispatch, item["1. symbol"]);
-            dispatch(addBookmark(data))
           }}
         >
           Subscribe

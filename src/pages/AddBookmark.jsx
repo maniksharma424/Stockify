@@ -1,4 +1,4 @@
-import {  getSuggestions } from "@/utilities";
+import { getSuggestions } from "@/utilities";
 import React, { useEffect, useState, useRef } from "react";
 
 import { motion } from "framer-motion";
@@ -10,14 +10,12 @@ const AddBookmark = () => {
 
   useEffect(() => {
     inputRef.current.focus();
-
   }, []);
 
   return (
     <>
       <motion.div
         className=" w-11/12  flex justify-center  "
-
         whileTap={{ scale: 0.9 }}
       >
         <motion.input
@@ -33,7 +31,9 @@ const AddBookmark = () => {
         />
       </motion.div>
       {text === "" ? (
-        <span className="text-[20px] w-2 absolute top-[215px] sm:right-[490px] right-9">🔍</span>
+        <span className="text-[20px] w-2 absolute top-[215px] sm:right-[490px] right-9">
+          🔍
+        </span>
       ) : (
         <button
           onClick={() => {
@@ -46,9 +46,17 @@ const AddBookmark = () => {
       )}
 
       {text === "" ? null : (
-        <ul className=" sm:w-[530px]  w-11/12 border-[1px]  max-h-fit min-h-min absolute   top-[253px] sm:top-[253px]   flex flex-col  shadow-2xl rounded-lg">
+        <ul className=" sm:w-[530px] w-11/12 border-[1px]  max-h-fit min-h-min absolute top-[253px] sm:top-[253px]   flex flex-col z-20 shadow-2xl rounded-lg">
           {suggestion.map((item, index) => {
-            return <SuggestionCard handleSuggestions={()=>{setText('')}} item={item} key={index} />;
+            return (
+              <SuggestionCard
+                handleSuggestions={() => {
+                  setText("");
+                }}
+                item={item}
+                key={index}
+              />
+            );
           })}
         </ul>
       )}

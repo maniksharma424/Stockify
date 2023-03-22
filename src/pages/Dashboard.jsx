@@ -16,10 +16,12 @@ const Dashboard = () => {
       <Head>
         <title>Dashboard</title>
       </Head>
-      <div className="max-w-full flex justify-center items-center 
-      bg-cover bg-no-repeat">
+      <div
+        className="max-w-full flex justify-center items-center 
+      bg-cover bg-no-repeat"
+      >
         <div
-          className={`container max-w-full sm:w-2/5 h-[800px]  flex flex-col justify-around items-center border-[1px] ${opacity}
+          className={`container max-w-full sm:w-2/5 h-[800px]  flex flex-col justify-around items-center border-[1px] shadow-2xl rounded-lg ${opacity} 
            ${background} ${text} 
            `}
         >

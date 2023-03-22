@@ -5,7 +5,8 @@ const dashboardSlice = createSlice({
   initialState: {
     opacity: 'opacity-100',
     background:'bg-white',
-    text:''
+    text:'',
+    modalBg :'bg-white'
   },
   reducers: {
     changeOpacity: (state) => {
@@ -25,11 +26,17 @@ const dashboardSlice = createSlice({
     },
     setTextDefault:(state)=>{
       state.text = ''
+    },
+    setModalNight:(state)=>{
+      state.modalBg = 'bg-[#444950]'
+    },
+    setModalDefault:(state)=>{
+      state.modalBg = 'bg-white'
     }
     
   },
 });
 export default dashboardSlice.reducer;
-export const { changeOpacity ,defaultOpacity,setDay,setNight,setTextNight,setTextDefault} = dashboardSlice.actions;
+export const { changeOpacity ,defaultOpacity,setDay,setNight,setTextNight,setTextDefault,setModalNight,setModalDefault} = dashboardSlice.actions;
 
 //#444950

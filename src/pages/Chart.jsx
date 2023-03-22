@@ -10,6 +10,7 @@ import {
   Tooltip,
 } from "chart.js";
 import { formatDate } from "@/utilities";
+
 ChartJS.register(
   LineElement,
   CategoryScale,
@@ -23,7 +24,7 @@ const Chart = ({ item }) => {
     dataValues: [],
     labelValues: [],
   });
-console.log('chartjs');
+  console.log("chartjs");
   useEffect(() => {
     const getChartData = async () => {
       const response = await fetch(
@@ -46,8 +47,6 @@ console.log('chartjs');
     };
     getChartData();
   }, []);
-
-  
   console.log(chartData);
 
   const data = {
@@ -56,8 +55,8 @@ console.log('chartjs');
       {
         labels: "prices",
         data: chartData?.dataValues?.slice(0, 30),
-        fill:true,
-        backgroundColor: "rgba(0, 0, 255, 0.2)",
+        fill: true,
+        backgroundColor:'rgba(255, 159, 64, 0.2)',
         borderColor: "#1e70d4",
         borderWidth: 1,
         pointBackgroundColor: "rgba(255, 99, 132, 1)",
@@ -74,27 +73,27 @@ console.log('chartjs');
     // plugins: {
     //   legend: true,
     // },
-    title:{
-display:true,
-position:"top",
-text:item["1. symbol"],
-fontSize:13,
+    title: {
+      display: true,
+      position: "top",
+      text: item["1. symbol"],
+      fontSize: 5,
     },
     scale: {
       xAxes: [
         {
-          type: 'time',
+          type: "time",
           time: {
-            unit: 'day',
+            unit: "day",
             displayFormats: {
-              day: 'MMM DD',
+              day: "MMM DD",
             },
           },
           ticks: {
             autoSkip: true,
             maxTicksLimit: Math.ceil(data.length / 2),
-            maxRotation: 180, // maximum rotation angle in degrees
-        minRotation: 0, // minimum rotation angle in degrees
+            maxRotation: 180,
+
           },
         },
       ],
@@ -103,7 +102,7 @@ fontSize:13,
 
   return (
     <div className="w-full h-full">
-      <Line data={data} options={options}></Line>
+      <Line  data={data} options={options}></Line>
     </div>
   );
 };

@@ -10,7 +10,7 @@ const Bookmarks = () => {
     <motion.div
       initial={{ y: "50%", opacity: 0, scale: 0.5 }}
       animate={{ y: 0, opacity: 1, scale: 1 }}
-      className="bookmarks w-11/12 h-3/5 border-[1px]  p-2 rounded-lg overflow-scroll shadow-xl bg-inherit"
+      className="bookmarks w-11/12 h-3/5 border-[1px]  p-2 rounded-lg overflow-scroll shadow-lg bg-inherit"
     >
       <p>My Bookmarks</p>
       <ul className="flex flex-col py-2 items-start">
