@@ -27,6 +27,7 @@ const Bookmarks = () => {
           <p className="text-[16px] text-gray-600 relative top-28 left-14 font-[100] ">
             Add bookmarks to get notified..
           </p>
+          // <iframe height={450} width={510} src="https://embed.lottiefiles.com/animation/99826"></iframe>
         ) : (
           addedBookmarks?.map((bookmark, index) => {
             return (

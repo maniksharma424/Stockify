@@ -41,7 +41,7 @@ const Chart = ({ item }) => {
       const labelValues = Object.keys(jsonData).map((key) => formatDate(key));
 
       setChartData({
-        dataValues: dataValues,
+        dataValues: dataValues.reverse(),
         labelValues: labelValues,
       });
     };

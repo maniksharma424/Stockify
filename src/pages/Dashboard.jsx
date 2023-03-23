@@ -16,6 +16,10 @@ const Dashboard = () => {
       <Head>
         <title>Dashboard</title>
       </Head>
+
+      {/* <svg viewBox="0 0 100 100">
+  <path d="M0,0 L0,60 Q25,70 50,60 Q75,50 100,60 L100,0 Z" fill="#00000" />
+</svg> */}
       <div
         className="max-w-full flex justify-center items-center 
       bg-cover bg-no-repeat"

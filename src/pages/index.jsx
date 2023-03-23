@@ -4,14 +4,18 @@ import Header from "./Header";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Head from "next/head";
+import Link from "next/link";
 
 const Homepage = () => {
   return (
     <>
+
       <Head>
         <title>Home</title>
       </Head>
-      <div className={MAIN_CONTAINER}>
+   <div className={MAIN_CONTAINER}>
+  
+
         <Header />
         <div className="container sm:flex-row flex-col flex-wrap flex max-w-full max-h-fit text-white ">
           <div className="box1 sm:w-1/2 w-full h-[765px] flex flex-col justify-start items-center">
@@ -63,6 +67,7 @@ const Homepage = () => {
           </motion.div>
         </div>
       </div>
+ 
     </>
   );
 };
