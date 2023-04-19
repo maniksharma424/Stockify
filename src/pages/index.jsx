@@ -4,21 +4,26 @@ import Header from "./Header";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Head from "next/head";
+import Link from "next/link";
+
 
 const Homepage = () => {
   return (
     <>
+
       <Head>
         <title>Home</title>
       </Head>
-      <div className={MAIN_CONTAINER}>
+   <div className={MAIN_CONTAINER}>
+  
+
         <Header />
         <div className="container sm:flex-row flex-col flex-wrap flex max-w-full max-h-fit text-white ">
           <div className="box1 sm:w-1/2 w-full h-[765px] flex flex-col justify-start items-center">
             <motion.div
               animate={{ y: -50 }}
               initial={{ y: 300 }}
-              className="w-3/4    px-3 sm:text-[35px] text-[15px] py-20"
+              className="w-3/4    px-3 sm:text-[35px] text-[15px] sm:mt-0 mt-36 sm:py-20"
             >
               Stockify
             </motion.div>
@@ -63,6 +68,7 @@ const Homepage = () => {
           </motion.div>
         </div>
       </div>
+ 
     </>
   );
 };

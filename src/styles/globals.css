@@ -2,3 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+#dash{
+    background-image: url("data:image/svg+xml;charset=UTF-8, %3csvg viewBox='0 0 100 100'%3e%3cpath d='M0,0 L0,60 Q25,70 50,60 Q75,50 100,60 L100,0 Z' fill='%23000000' /%3e%3c/svg%3e");
+    background-position: center;
+    background-size:contain;
+}
