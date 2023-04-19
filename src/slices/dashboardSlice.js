@@ -39,4 +39,3 @@ const dashboardSlice = createSlice({
 export default dashboardSlice.reducer;
 export const { changeOpacity ,defaultOpacity,setDay,setNight,setTextNight,setTextDefault,setModalNight,setModalDefault} = dashboardSlice.actions;
 
-//#444950

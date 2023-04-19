@@ -4,12 +4,15 @@ import Signup from "./Signup";
 
 const Auth = () => {
   const [isSignup, setIsSignup] = useState(false);
+
+  
   const handleAuthentication = () => {
     setIsSignup((n) => !n);
   };
 
-  if (isSignup) return <Login handleAuthentication={handleAuthentication} />;
-  else return <Signup handleAuthentication={handleAuthentication} />;
+  if (isSignup) return <Signup handleAuthentication={handleAuthentication} />;
+  else  return <Login handleAuthentication={handleAuthentication} />;
+
 };
 
 export default Auth;

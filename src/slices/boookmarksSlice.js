@@ -1,3 +1,4 @@
+import supabase from "@/config/supabaseClient";
 import { createSlice } from "@reduxjs/toolkit";
 
 const bookmarkSlice = createSlice({
@@ -6,17 +7,22 @@ const bookmarkSlice = createSlice({
     bookmarks: [],
   },
   reducers: {
-    addBookmark: (state, action) => {
+    setBookmarks: (state, action) => {
+      state.bookmarks = action.payload;
+    },
+    addBookmarks: (state, action) => {
       state.bookmarks.push(action.payload);
     },
     deleteBookmark: (state, action) => {
       state.bookmarks = state.bookmarks.filter(
-        item => item["01. symbol"] !== action.payload["01. symbol"]
+        (item) => item["01. symbol"] !== action.payload["01. symbol"]
       );
-
     },
+  sortBookmarks:(state,action)=>{
+     state.bookmarks = action.payload
+    }
   },
 });
 export default bookmarkSlice.reducer;
-export const { addBookmark, deleteBookmark } = bookmarkSlice.actions;
-
+export const { setBookmarks, deleteBookmark, addBookmarks,sortBookmarks} =
+  bookmarkSlice.actions;

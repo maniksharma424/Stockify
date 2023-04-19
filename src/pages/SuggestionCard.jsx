@@ -33,8 +33,7 @@ const SuggestionCard = ({ item,handleSuggestions }) => {
           whileTap={{ scale: 0.5 }}
           onClick={(e) => {
             e.stopPropagation();
-            getStockPrice(dispatch, item["1. symbol"]);
-            setAdded({ value: "✓", color: "white", bg: "red-500" });
+            getStockPrice(dispatch, item["1. symbol"]) && setAdded({ value: "✓", color: "white", bg: "red-500" });
           }}
           className={`rounded-md w-1/6  border-[1px] text-${added.color} bg-${added.bg}`}
         >
@@ -47,7 +46,6 @@ const SuggestionCard = ({ item,handleSuggestions }) => {
             handleSuggestions={()=>{handleSuggestions()}}
               handleModal={() => {
                 setShowModal(false);
-                
               }}
               item={item}
             />,

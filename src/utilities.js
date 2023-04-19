@@ -1,7 +1,7 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import supabase from "./config/supabaseClient";
 import { ALPHA_VANTAGE_KEY } from "./constants";
-import { addBookmark } from "./slices/boookmarksSlice";
-
+import { addBookmarks } from "./slices/boookmarksSlice";
 
 const debounce = (callback, delay) => {
   let timer;
@@ -13,6 +13,10 @@ const debounce = (callback, delay) => {
     }, delay);
   };
 };
+
+
+
+/////////////////////////////////////////
 
 const getSuggestionResults = async (text, setSuggestions) => {
   const response = await fetch(
@@ -29,20 +33,91 @@ const getSuggestionResults = async (text, setSuggestions) => {
 export const getSuggestions = debounce(getSuggestionResults, 400);
 
 /////////////////////////////////////////////////////////////////////////////
-export const getStockPrice = async (dispatch,symbol) => {
+export const getStockPrice = async (dispatch, symbol) => {
   const response = await fetch(
     `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=` +
       ALPHA_VANTAGE_KEY
-  ).then(res=>res.json())
+  ).then((res) => res.json());
 
-  const data = await response["Global Quote"]
+  const stockData = await response["Global Quote"];
 
-  dispatch(addBookmark(data));
+ stockData ?  dispatch(addBookmarks(stockData)):null
+ stockData ?  addToBackend(stockData):null
+
+
 };
 
-export const formatDate = (dateStr) =>{
+
+
+
+
+
+export const formatDate = (dateStr) => {
   const date = new Date(dateStr);
   const day = date.getDate();
-  const month = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(date);
-  return `${day} ${month.substring(0,3)}`;
-}
+  const month = new Intl.DateTimeFormat("en-US", { month: "long" }).format(
+    date
+  );
+  return `${day} ${month.substring(0, 3)}`;
+};
+
+export const addToBackend = async (stockData) => {
+  const authInfo = await JSON.parse(
+    localStorage.getItem("sb-tqjnbdxfwtkvzmnwvpdu-auth-token")
+  );
+
+  const { data, error } = await supabase
+    .from("users")
+    .select()
+    .eq("phone", authInfo?.user?.user_metadata?.phoneNumber);
+
+  const Bookmarks = data[0]?.stocks;
+
+  if (Bookmarks) {
+    const addedBookmark = [stockData];
+
+    const newBookmarks = Bookmarks.concat(addedBookmark);
+
+    const { data, error } = await supabase
+      .from("users")
+      .update({ stocks: newBookmarks })
+      .eq("phone", authInfo?.user?.user_metadata?.phoneNumber)
+      .select();
+  } else {
+    const { Data, error } = await supabase
+      .from("users")
+      .update({ stocks: [stockData] })
+      .eq("phone", authInfo?.user?.user_metadata?.phoneNumber)
+      .select();
+
+
+  }
+  return true
+};
+export const deleteFromBackend = async (stockData) => {
+  const authInfo = await JSON.parse(
+    localStorage.getItem("sb-tqjnbdxfwtkvzmnwvpdu-auth-token")
+  );
+
+  const { data, error } = await supabase
+    .from("users")
+    .select()
+    .eq("phone", authInfo?.user?.user_metadata?.phoneNumber);
+
+  const Bookmarks = data[0]?.stocks;
+
+  if (Bookmarks) {
+
+    const newBookmarks = Bookmarks.filter(item=>item["01. symbol"] !== stockData["01. symbol"])
+
+
+    const { data, error } = await supabase
+      .from("users")
+      .update({ stocks: newBookmarks })
+      .eq("phone", authInfo?.user?.user_metadata?.phoneNumber)
+      .select();
+  }
+  return true
+
+};
+
